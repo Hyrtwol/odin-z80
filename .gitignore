@@ -1,5 +1,7 @@
 ﻿.vs/
 x64/
+/build/
 *.user
 *.pdb
 *.exe
+*.dir

@@ -122,7 +122,7 @@ Z80 :: struct {
 	This member is intended to hold a reference to the context to which
 	the object belongs. It is safe not to initialize it when this is not
 	necessary. */
-	zcontext:     zcontext,
+	context_:     zcontext,
 
 	/* Invoked to perform an opcode fetch.
 
@@ -159,7 +159,7 @@ Z80 :: struct {
 	This callback indicates the beginning of an I/O read M-cycle. The
 	function must return the byte read from the I/O port specified by
 	the second argument. */
-	_in:          Z80Read,
+	in_:          Z80Read,
 
 	/* Invoked to perform an I/O port write.
 

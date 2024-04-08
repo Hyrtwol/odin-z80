@@ -3,6 +3,7 @@ package z80emulator
 import "core:fmt"
 import "core:os"
 import "core:runtime"
+import "core:path/filepath"
 import z80 "../.."
 
 dump_cpu :: false
@@ -109,17 +110,17 @@ load_rom :: proc(filename: string) {
 main :: proc() {
 	fmt.print("Z80 Emulator\n")
 
-	load_rom("../../hello.rom")
+	load_rom(filepath.clean("../../data/hello.rom"))
 
 	cpu: z80.Z80 = {
 		fetch_opcode = z_fetch_opcode,
 		fetch        = z_fetch,
 		read         = z_read,
 		write        = z_write,
-		_in          = z_in,
+		in_          = z_in,
 		out          = z_out,
 		halt         = z_halt,
-		zcontext     = nil,
+		context_     = nil,
 		nop          = nil,
 		nmia         = nil,
 		inta         = nil,
