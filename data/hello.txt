@@ -1,0 +1,53 @@
+0000             	.ORG 	0000h
+0000             ;
+0000
+0000 3E 0C       	LD	A,12	   	; cls ASCII code
+0002 D3 01       	OUT	(1),a 		; Output to serial port
+0004             ;
+0004 21 23 00    	LD	HL,line1	; Address of line in HL
+0007 CD 16 00    	CALL	printline	; Print hello world
+000A             ;
+000A             ; Print an ASCII Table with 96 Characters
+000A             ;
+000A 06 60       	LD	B,96		; 96 characters
+000C 3E 20       	LD 	A,32		; Start at space = 32 in ASCII code
+000E             loop2:
+000E D3 01       	OUT	(1),A		; Output to serial port
+0010 C6 01       	ADD 	A,1		; Next ASCII Character
+0012 B8          	CP 	B		; Check for end loop
+0013 20 F9       	JR 	NZ,loop2	; Keep looping until b == 0
+0015             ;
+0015 76          	HALT			; Stop the program
+0016             ;
+0016             ; ---------------------------------
+0016             ; Routine to print out a line in (hl)
+0016             ; --------------------------------
+0016             printline:
+0016 7E          	LD	A,(HL)	   	; Get char to print
+0017 FE 24       	CP	'$'	   	; Check '$' terminator
+0019 CA 22 00    	JP	Z,printend    	; if equal jmp to end
+001C             ;
+001C D3 01       	OUT	(1),A		; Output char to terminal
+001E 23          	INC	HL 	   	; Next char
+001F C3 16 00    	JP	printline	; Loop
+0022             printend:
+0022 C9          	RET
+0023
+0023             ;-------------------
+0023             ; Data
+0023             ; ------------------
+0023
+0023             ; 13 is newline character we mark en of line
+0023             ; with $ character
+0023
+0023 48 65 6C 6C line1:	.DB	"Hello World",13, 10, 13, 10,'$'
+0027 6F 20 57 6F
+002B 72 6C 64 0D
+002F 0A 0D 0A 24
+0033
+0033             	.END
+
+0x3E,0x0C,0xD3,0x01,0x21,0x23,0x00,0xCD,0x16,0x00,0x06,0x60,0x3E,0x20,0xD3,0x01,
+0xC6,0x01,0xB8,0x20,0xF9,0x76,0x7E,0xFE,0x24,0xCA,0x22,0x00,0xD3,0x01,0x23,0xC3,
+0x16,0x00,0xC9,0x48,0x65,0x6C,0x6C,0x6F,0x20,0x57,0x6F,0x72,0x6C,0x64,0x0D,0x0A,
+0x0D,0x0A,0x24,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,

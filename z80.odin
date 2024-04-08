@@ -9,7 +9,8 @@
 '===========================================================*/
 package z80
 
-foreign import z80lib "Z80.lib"
+//foreign import z80lib "Z80.lib"
+foreign import z80lib "build/Release/Z80.lib"
 
 zusize :: u64
 zuint8 :: u8
