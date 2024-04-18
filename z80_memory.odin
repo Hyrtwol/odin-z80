@@ -21,11 +21,13 @@ ptr64kb :: ^bank64kb
 //bank :: struct { read: ptr16kb, write: ptr16kb }
 bank16 :: [2]ptr16kb
 bank4x16 :: [4]bank16
+//bank4  :: [4]ptr16kb
+//p_bank4  :: [4]ptr16kb
+//p_bank_rw :: [2]p_bank4
 
-p_bank_4  :: [4]ptr16kb
-//bank_rw :: [2]bank_4
-bank_rw :: struct { read: [4]ptr16kb, write: ptr64kb }
-
+//bank_rw :: struct { read: [4]ptr16kb, write: ptr64kb }
+bank16_rw :: struct { read: ptr16kb, write: ptr16kb }
+bank4x16_rw :: [4]bank16_rw
 //ram_banks :: [4]bank16kb
 //rom_banks :: [4]bank16kb
 
