@@ -110,7 +110,7 @@ load_rom :: proc(filename: string) {
 main :: proc() {
 	fmt.print("Z80 Emulator\n")
 
-	load_rom(filepath.clean("../../data/hello.rom"))
+	load_rom(filepath.clean("hello.rom"))
 
 	cpu: z80.Z80 = {
 		fetch_opcode = z_fetch_opcode,
