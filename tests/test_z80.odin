@@ -55,3 +55,35 @@ verify_z80_memory :: proc(t: ^testing.T) {
 	banks[1][0][666] = 0xCD
 	o.expect_value(t, banks[1][0][666], 0xCD)
 }
+
+@(test)
+get_bank :: proc(t: ^testing.T) {
+	o.expect_value(t, z.get_bank16(0x0000), 0)
+	o.expect_value(t, z.get_bank16(0x3FFF), 0)
+	o.expect_value(t, z.get_bank16(0x4000), 1)
+	o.expect_value(t, z.get_bank16(0x7FFF), 1)
+	o.expect_value(t, z.get_bank16(0x8000), 2)
+	o.expect_value(t, z.get_bank16(0xBFFF), 2)
+	o.expect_value(t, z.get_bank16(0xC000), 3)
+	o.expect_value(t, z.get_bank16(0xFFFF), 3)
+}
+
+@(test)
+bank_io :: proc(t: ^testing.T) {
+
+
+read16kb :: proc(address: address) -> zuint8 {
+	fmt.println(#procedure, address)
+}
+write16kb :: proc(address: address, b: zuint8) {
+
+}
+
+	banks : z80.bank4x16
+
+	bank_rw := z80.bank16_rw {
+
+	}
+
+
+}

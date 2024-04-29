@@ -46,19 +46,19 @@ Z80_HOOK :: 0x64
 /* Bitmask of the Z80 S flag. */
 Z80_SF :: 128
 /* Bitmask of the Z80 Z flag. */
-Z80_ZF ::  64
+Z80_ZF :: 64
 /* Bitmask of the Z80 Y flag. */
-Z80_YF ::  32
+Z80_YF :: 32
 /* Bitmask of the Z80 H flag. */
-Z80_HF ::  16
+Z80_HF :: 16
 /* Bitmask of the Z80 X flag. */
-Z80_XF ::   8
+Z80_XF :: 8
 /* Bitmask of the Z80 P/V flag. */
-Z80_PF ::   4
+Z80_PF :: 4
 /* Bitmask of the Z80 N flag. */
-Z80_NF ::   2
+Z80_NF :: 2
 /* Bitmask of the Z80 C flag. */
-Z80_CF ::   1
+Z80_CF :: 1
 
 /* Defines a pointer to a <tt>@ref Z80</tt> callback function invoked to
 perform a read operation.
@@ -642,52 +642,52 @@ Z80_WZL :: Z80_MEMPTRL
 foreign z80lib {
 	/* Sets the power state of a <tt>@ref Z80</tt>.
 
-@param self Pointer to the object on which the function is called.
-@param state
-  @c Z_TRUE  = power on;
-  @c Z_FALSE = power off. */
+	@param self Pointer to the object on which the function is called.
+	@param state
+		@c Z_TRUE  = power on;
+		@c Z_FALSE = power off. */
 	z80_power :: proc(self: PZ80, state: zboolean) ---
 
 	/* Performs an instantaneous normal RESET on a <tt>@ref Z80</tt>.
 
-@param self Pointer to the object on which the function is called. */
+	@param self Pointer to the object on which the function is called. */
 	z80_instant_reset :: proc(self: PZ80) ---
 
 	/* Sends a special RESET signal to a <tt>@ref Z80</tt>.
 
-@sa
-- http://www.primrosebank.net/computers/z80/z80_special_reset.htm
-- US Patent 4486827
+	@sa
+	- http://www.primrosebank.net/computers/z80/z80_special_reset.htm
+	- US Patent 4486827
 
-@param self Pointer to the object on which the function is called. */
+	@param self Pointer to the object on which the function is called. */
 	z80_special_reset :: proc(self: PZ80) ---
 
 	/* Sets the state of the INT line of a <tt>@ref Z80</tt>.
 
-@param self Pointer to the object on which the function is called.
-@param state
-  @c Z_TRUE  = set line low;
-  @c Z_FALSE = set line high. */
+	@param self Pointer to the object on which the function is called.
+	@param state
+		@c Z_TRUE  = set line low;
+		@c Z_FALSE = set line high. */
 	z80_int :: proc(self: PZ80, state: zboolean) ---
 
 	/* Triggers the NMI line of a <tt>@ref Z80</tt>.
 
-@param self Pointer to the object on which the function is called. */
+	@param self Pointer to the object on which the function is called. */
 	z80_nmi :: proc(self: PZ80) ---
 
 	/* Runs a <tt>@ref Z80</tt> for a given number of clock @p cycles,
-executing only instructions without responding to signals.
+	executing only instructions without responding to signals.
 
-@param self Pointer to the object on which the function is called.
-@param cycles Number of clock cycles to be emulated.
-@return The actual number of clock cycles emulated. */
+	@param self Pointer to the object on which the function is called.
+	@param cycles Number of clock cycles to be emulated.
+	@return The actual number of clock cycles emulated. */
 	z80_execute :: proc(self: PZ80, cycles: zusize) -> zusize ---
 
 	/* Runs a <tt>@ref Z80</tt> for a given number of clock @p cycles.
 
-@param self Pointer to the object on which the function is called.
-@param cycles Number of clock cycles to be emulated.
-@return The actual number of clock cycles emulated. */
+	@param self Pointer to the object on which the function is called.
+	@param cycles Number of clock cycles to be emulated.
+	@return The actual number of clock cycles emulated. */
 	z80_run :: proc(self: PZ80, cycles: zusize) -> zusize ---
 }
 
