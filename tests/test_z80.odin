@@ -1,11 +1,9 @@
 package test_z80
 
-import "core:bytes"
+import z ".."
 import "core:fmt"
-import "core:runtime"
 import "core:testing"
 import o "shared:ounit"
-import z ".."
 
 expectf :: testing.expectf
 expect_size :: o.expect_size

@@ -1,10 +1,10 @@
 package z80emulator
 
+import z80 "../.."
+import "base:runtime"
 import "core:fmt"
 import "core:os"
-import "core:runtime"
 import "core:path/filepath"
-import z80 "../.."
 
 dump_cpu :: false
 cycles_per_tick :: 100
