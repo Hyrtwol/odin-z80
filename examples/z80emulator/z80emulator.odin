@@ -51,48 +51,48 @@ z_out :: proc(zcontext: rawptr, address: z80.zuint16, value: z80.zuint8) {
 	switch port {
 	case 1:
 		switch value {
-			case '\n': fmt.println(flush = true) /* Line Feed */
-			case '\f': /*skip Form Feed*/
-			case '\r': /*skip Carriage Return*/
-			case: fmt.print(rune(value))
+		case '\n': fmt.println(flush = true) /* Line Feed */
+		case '\f': /*skip Form Feed*/
+		case '\r': /*skip Carriage Return*/
+		case: fmt.print(rune(value))
 		}
 	case:
 		{
 			fmt.printf("out[0x%2X]=0x%2X", port, value)
 			if value >= 32 {fmt.printf(" '%v'", rune(value))}
-			fmt.print("\n")
+			fmt.println()
 		}
 	}
 }
 
 z_halt :: proc(zcontext: rawptr, signal: z80.zuint8) {
-	fmt.printf("\nhalt %d\n", signal)
+	fmt.printfln("\nhalt %d", signal)
 	running = false
 }
 
 z_reti :: proc(zcontext: rawptr) {
-	fmt.print("reti\n")
+	fmt.println("reti")
 }
 
 z_retn :: proc(zcontext: rawptr) {
-	fmt.print("retn\n")
+	fmt.println("retn")
 }
 
 z_illegal :: proc(zcpu: z80.PZ80, opcode: z80.zuint8) -> z80.zuint8 {
 	context = runtime.default_context()
-	fmt.printf("illegal %d\n", opcode)
+	fmt.printfln("illegal %d", opcode)
 	return 10
 }
 
-reset :: proc() {
-	fmt.print("memory reset\n")
+memory_reset :: proc() {
+	fmt.println("memory reset")
 	runtime.memset(&memory, 0, mem_size)
 }
 
 load_rom :: proc(filename: string) {
-	reset()
+	memory_reset()
 
-	fmt.printf("loading rom %v\n", filename)
+	fmt.printfln("loading rom %v", filename)
 
 	data, ok := os.read_entire_file(filename)
 	defer delete(data)
@@ -108,7 +108,7 @@ load_rom :: proc(filename: string) {
 }
 
 main :: proc() {
-	fmt.print("Z80 Emulator\n")
+	fmt.println("Z80 Emulator")
 
 	load_rom(filepath.clean("hello.rom"))
 
@@ -137,10 +137,6 @@ main :: proc() {
 	z80.z80_power(&cpu, true)
 	z80.z80_instant_reset(&cpu)
 
-	//cycles :: 4000
-	//res := z80.z80_run(&cpu, cycles)
-	//fmt.printf("\nRun %v\n", res)
-
 	running = true
 	total: z80.zusize = 0
 	reps := 0
@@ -148,9 +144,9 @@ main :: proc() {
 		total += z80.z80_run(&cpu, cycles_per_tick)
 		reps += 1
 	}
-	fmt.printf("total %v (%v)\n", total, reps)
+	fmt.printfln("total %v (%v)", total, reps)
 
-	if dump_cpu {fmt.printf("CPU %v\n", cpu)}
+	if dump_cpu {fmt.printfln("CPU %v", cpu)}
 
 	fmt.println("Done.")
 }

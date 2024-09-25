@@ -1,4 +1,4 @@
-// +vet
+#+vet
 /*
        ______  ______ ______
       /\___  \/\  __ \\  __ \
@@ -20,6 +20,10 @@ zint16 :: i16
 zint32 :: i32
 zboolean :: bool
 zcontext :: rawptr
+// Z80_CONTEXT :: struct {
+// 	memory: [^]zuint8
+// }
+// zcontext :: ^Z80_CONTEXT
 
 /* Maximum number of clock cycles that <tt>@ref z80_run</tt> and
 <tt>@ref z80_execute</tt> can emulate. */

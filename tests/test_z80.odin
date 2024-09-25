@@ -3,12 +3,14 @@ package test_z80
 import z ".."
 import "core:fmt"
 import "core:testing"
-import o "shared:ounit"
 
 expectf :: testing.expectf
-expect_size :: o.expect_size
-expect_value :: o.expect_value
-expect_value_64 :: o.expect_value_64
+expect_value :: testing.expect_value
+
+@(private)
+expect_size :: proc(t: ^testing.T, $act: typeid, exp: int, loc := #caller_location) {
+	expectf(t, size_of(act) == exp, "size_of(%v) should be %d was %d", typeid_of(act), exp, size_of(act), loc = loc)
+}
 
 @(test)
 verify_flags :: proc(t: ^testing.T) {
@@ -36,10 +38,10 @@ _16kb :: 1 << 14
 
 @(test)
 verify_z80_memory :: proc(t: ^testing.T) {
-	o.expect_value(t, z.size_64kb, _64kb)
-	o.expect_value(t, z.size_16kb, _16kb)
-	o.expect_value(t, len(z.bank16kb), _16kb)
-	o.expect_value(t, size_of(z.bank16kb), _16kb)
+	expect_value(t, z.size_64kb, _64kb)
+	expect_value(t, z.size_16kb, _16kb)
+	expect_value(t, len(z.bank16kb), _16kb)
+	expect_value(t, size_of(z.bank16kb), _16kb)
 
 	ram: [4]z.bank16kb = ---
 	rom: [2]z.bank16kb = ---
@@ -51,37 +53,34 @@ verify_z80_memory :: proc(t: ^testing.T) {
 
 	banks: z.bank4x16 = {{&ram[0], &rom[0]}, {&ram[1], &ram[1]}, {&ram[2], &ram[2]}, {&ram[3], &rom[1]}}
 	banks[1][0][666] = 0xCD
-	o.expect_value(t, banks[1][0][666], 0xCD)
+	expect_value(t, banks[1][0][666], 0xCD)
 }
 
 @(test)
 get_bank :: proc(t: ^testing.T) {
-	o.expect_value(t, z.get_bank16(0x0000), 0)
-	o.expect_value(t, z.get_bank16(0x3FFF), 0)
-	o.expect_value(t, z.get_bank16(0x4000), 1)
-	o.expect_value(t, z.get_bank16(0x7FFF), 1)
-	o.expect_value(t, z.get_bank16(0x8000), 2)
-	o.expect_value(t, z.get_bank16(0xBFFF), 2)
-	o.expect_value(t, z.get_bank16(0xC000), 3)
-	o.expect_value(t, z.get_bank16(0xFFFF), 3)
+	expect_value(t, z.get_bank16(0x0000), 0)
+	expect_value(t, z.get_bank16(0x3FFF), 0)
+	expect_value(t, z.get_bank16(0x4000), 1)
+	expect_value(t, z.get_bank16(0x7FFF), 1)
+	expect_value(t, z.get_bank16(0x8000), 2)
+	expect_value(t, z.get_bank16(0xBFFF), 2)
+	expect_value(t, z.get_bank16(0xC000), 3)
+	expect_value(t, z.get_bank16(0xFFFF), 3)
 }
 
 @(test)
 bank_io :: proc(t: ^testing.T) {
 
-
-read16kb :: proc(address: address) -> zuint8 {
-	fmt.println(#procedure, address)
-}
-write16kb :: proc(address: address, b: zuint8) {
-
-}
-
-	banks : z80.bank4x16
-
-	bank_rw := z80.bank16_rw {
-
+	read16kb :: proc(address: z.address) -> z.zuint8 {
+		fmt.println(#procedure, address)
+		return 0
+	}
+	write16kb :: proc(address: z.address, b: z.zuint8) {
 	}
 
+	banks: z.bank4x16
+	_ = banks
 
+	bank_rw := z.bank16_rw{}
+	_ = bank_rw
 }

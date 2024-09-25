@@ -50,7 +50,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>..\sources;..\..\..\tools\includes;D:\dev\z80\zeta\API</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\z80\sources;..\z80\API;..\zeta\API;..\shared\ounit\tools\includes</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -66,7 +66,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>..\sources;..\..\..\tools\includes;D:\dev\z80\zeta\API</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\z80\sources;..\z80\API;..\zeta\API;..\shared\ounit\tools\includes</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
