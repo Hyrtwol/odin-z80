@@ -38,5 +38,5 @@ adr_bank16 :: #force_inline proc "contextless" (a: address) -> address {return a
 // bank_read :: #force_inline proc "contextless" (b: ^bank4x16, a: address) -> zuint8 {return b[get_bank16(a)][0][adr_bank16(a)]}
 // bank_write :: #force_inline proc "contextless" (b: ^bank4x16, a: address, v: zuint8) {b[get_bank16(a)][1][adr_bank16(a)]=v}
 
-bank_read :: #force_inline proc "contextless" (banks: ^bank4x16_rw, a: address) -> zuint8 {return banks[get_bank16(a)].read(adr_bank16(a))}
-bank_write :: #force_inline proc "contextless" (banks: ^bank4x16_rw, a: address, v: zuint8) {banks[get_bank16(a)].write(adr_bank16(a), v)}
+bank_read :: #force_inline proc (banks: ^bank4x16_rw, a: address) -> zuint8 {return banks[get_bank16(a)].read(adr_bank16(a))}
+bank_write :: #force_inline proc (banks: ^bank4x16_rw, a: address, v: zuint8) {banks[get_bank16(a)].write(adr_bank16(a), v)}
