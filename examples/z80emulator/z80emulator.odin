@@ -8,7 +8,7 @@ import "core:path/filepath"
 
 dump_cpu :: false
 cycles_per_tick :: 100
-mem_size :: 0x10000
+mem_size :: 0x10000 // 64KB :)
 memory: [mem_size]u8
 running: bool = false
 
